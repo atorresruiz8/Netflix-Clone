@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+// TODO: refactor all the business logic related to title preview view controller here
 struct TitlePreviewViewModel {
     let title: String
     let youtubeView: VideoElement

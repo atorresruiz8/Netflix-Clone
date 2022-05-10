@@ -32,6 +32,7 @@
 		8B63942C28245FA0004401BF /* TitlePreviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B63942B28245FA0004401BF /* TitlePreviewViewModel.swift */; };
 		8B63942F282478C8004401BF /* NetflixModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8B63942D282478C7004401BF /* NetflixModel.xcdatamodeld */; };
 		8B63943128247AA1004401BF /* DataPersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B63943028247AA1004401BF /* DataPersistenceManager.swift */; };
+		8BD2B54A282B033500DC3F75 /* APIKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BD2B549282B033400DC3F75 /* APIKeys.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +61,7 @@
 		8B63942B28245FA0004401BF /* TitlePreviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitlePreviewViewModel.swift; sourceTree = "<group>"; };
 		8B63942E282478C7004401BF /* NetflixModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NetflixModel.xcdatamodel; sourceTree = "<group>"; };
 		8B63943028247AA1004401BF /* DataPersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataPersistenceManager.swift; sourceTree = "<group>"; };
+		8BD2B549282B033400DC3F75 /* APIKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKeys.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,6 +154,7 @@
 			isa = PBXGroup;
 			children = (
 				8B63941428241373004401BF /* Extensions.swift */,
+				8BD2B549282B033400DC3F75 /* APIKeys.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -263,6 +266,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8BD2B54A282B033500DC3F75 /* APIKeys.swift in Sources */,
 				8B6394202824286D004401BF /* TitleTableViewCell.swift in Sources */,
 				8B090EC2282300790028D915 /* SearchViewController.swift in Sources */,
 				8B63941928241E70004401BF /* TitleCollectionViewCell.swift in Sources */,
