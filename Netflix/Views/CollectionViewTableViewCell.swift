@@ -92,7 +92,6 @@ extension CollectionViewTableViewCell: UICollectionViewDelegate, UICollectionVie
                 let viewModel = TitlePreviewViewModel(title: titleName, youtubeView: videoElement, titleOverview: titleOverview)
                 guard let strongSelf = self else { return }
                 self?.delegate?.collectionViewTableViewCellDidTapCell(strongSelf, viewModel: viewModel)
-                print(videoElement.id)
             case .failure(let error):
                 print(error.localizedDescription)
             }

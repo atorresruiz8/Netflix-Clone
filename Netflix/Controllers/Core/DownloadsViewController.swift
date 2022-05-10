@@ -77,7 +77,7 @@ extension DownloadsViewController: UITableViewDataSource, UITableViewDelegate {
             DataPersistenceManager.shared.deleteTitleWith(model: titles[indexPath.row], completion: { [weak self] result in
                 switch result {
                 case .success():
-                    print("Deleted from the database")
+                    print("Deleted from the database.")
                 case .failure(let error):
                     print(error.localizedDescription)
                 }
