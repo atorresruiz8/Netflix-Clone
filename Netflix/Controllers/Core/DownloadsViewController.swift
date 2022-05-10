@@ -6,7 +6,6 @@
 //
 
 import UIKit
-// TODO: change the "download" button from titletableviewcell to say "play" here when viewing downloaded movies
 class DownloadsViewController: UIViewController {
 
     private var titles: [TitleItem] = [TitleItem]()
