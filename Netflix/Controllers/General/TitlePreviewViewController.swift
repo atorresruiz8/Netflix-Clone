@@ -8,7 +8,6 @@
 import UIKit
 import WebKit
 
-//TODO: fix why hasDownloadBeenPressed isn't actually toggling the code to download a movie to CoreData
 class TitlePreviewViewController: UIViewController {
     private let webView: WKWebView = {
         let webView = WKWebView()
@@ -17,7 +16,7 @@ class TitlePreviewViewController: UIViewController {
     }()
     
     private var titles: [Title] = [Title]()
-    var hasDownloadBeenPressed = false
+    private var viewModel: TitlePreviewViewModel?
     
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -79,7 +78,7 @@ class TitlePreviewViewController: UIViewController {
         // present an alert to let the user know their movie is downloading
         let alert = UIAlertController(title: "Downloading...", message: "Your selected movie will download to your device now.", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { [weak self] _ in
-            self?.hasDownloadBeenPressed = true
+            self?.downloadPreviewTitle(with: (self?.viewModel)!)
         }))
         self.present(alert, animated: true)
     }
@@ -141,11 +140,11 @@ class TitlePreviewViewController: UIViewController {
     }
     
     func configureTitlePreview(with model: TitlePreviewViewModel) {
+        // update the global viewModel variable with the information passed in from HomeViewController so we can use it for downloading movies off TitlePreviewViewController
+        viewModel = model
         titleLabel.text = model.title
         titleLabel.numberOfLines = 0
         overviewLabel.text = model.titleOverview
-        // if the download button is pressed, pass the view model along so we can download that specific movie
-        if hasDownloadBeenPressed { downloadPreviewTitle(with: model) }
     }
     
     func downloadPreviewTitle(with model: TitlePreviewViewModel) {
