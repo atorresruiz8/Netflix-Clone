@@ -128,7 +128,7 @@ class TitlePreviewViewController: UIViewController {
         NSLayoutConstraint.activate(titleLabelConstaints)
         NSLayoutConstraint.activate(overviewLabelConstraints)
         
-        if downloadButton.isHidden {
+        if downloadButton.isHidden { // constrain the play button instead if the download button is hidden
             NSLayoutConstraint.activate(playButtonConstraints)
         } else {
             NSLayoutConstraint.activate(downloadButtonConstraints)
@@ -145,13 +145,13 @@ class TitlePreviewViewController: UIViewController {
         titleLabel.text = model.title
         titleLabel.numberOfLines = 0
         overviewLabel.text = model.titleOverview
-    }
-    
-    func downloadPreviewTitle(with model: TitlePreviewViewModel) {
+        
         // load the url to show a movie trailer or something related to the movie name
         guard let url = URL(string: "https://www.youtube.com/embed/\(model.youtubeView.id.videoId)") else { return }
         webView.load(URLRequest(url: url))
-        
+    }
+    
+    func downloadPreviewTitle(with model: TitlePreviewViewModel) {
         // search for titles with the name provided to us by model
         APICaller.shared.search(with: model.title, completion: { [weak self] result in
             DispatchQueue.main.async {
