@@ -94,16 +94,19 @@ class HomeViewController: UIViewController {
         var image = UIImage(named: "netflixLogo")
         image = image?.withRenderingMode(.alwaysOriginal)
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: image, style: .done, target: self, action: #selector(generateNewRandomlySelectedTitle))
-        navigationItem.rightBarButtonItems = [
-            UIBarButtonItem(image: UIImage(systemName: "person"), style: .done, target: self, action: nil),
-            UIBarButtonItem(image: UIImage(systemName: "play.rectangle"), style: .done, target: self, action: nil)
-        ]
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "person"), style: .done, target: self, action: #selector(pressedProfileButton))
         navigationController?.navigationBar.tintColor = .white
     }
     
     @objc func generateNewRandomlySelectedTitle() {
         // reload and display a new randomly selected title upon pressing the Netflix logo button on the navigation bar
         configureHeroHeaderView()
+    }
+    
+    @objc func pressedProfileButton() {
+        let alert = UIAlertController(title: "Logged in", message: "You are currently logged in as a guest.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        self.present(alert, animated: true)
     }
     
     override func viewDidLayoutSubviews() {
