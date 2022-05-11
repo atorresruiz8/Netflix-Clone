@@ -104,8 +104,25 @@ class HomeViewController: UIViewController {
     }
     
     @objc func pressedProfileButton() {
-        let alert = UIAlertController(title: "Logged in", message: "You are currently logged in as a guest.", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        // this could be expanded upon to make an actual login/sign out feature but for now it's very basic and changes based on the input user enters
+        let alert = UIAlertController(title: "Not logged in", message: "You are currently not logged in.", preferredStyle: .alert)
+        let login = UIAlertAction(title: "Login", style: .default) {_ in
+            let newAlert = UIAlertController(title: "Logged in", message: "You are logged in as \(alert.textFields![0].text!)", preferredStyle: .alert)
+            newAlert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+            self.present(newAlert, animated: true)
+        }
+        
+        alert.addTextField { (textField) in
+            textField.placeholder = "Enter your username."
+        }
+        alert.addTextField { (textField) in
+            textField.placeholder = "Enter your password."
+        }
+        
+        alert.addAction(login)
+        
+        let cancel = UIAlertAction(title: "Cancel", style: .default, handler: nil)
+        alert.addAction(cancel)
         self.present(alert, animated: true)
     }
     
