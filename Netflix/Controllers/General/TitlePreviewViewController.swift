@@ -17,6 +17,7 @@ class TitlePreviewViewController: UIViewController {
     
     private var titles: [Title] = [Title]()
     private var viewModel: TitlePreviewViewModel?
+    private var selectedTitle: Title?
     
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -44,7 +45,7 @@ class TitlePreviewViewController: UIViewController {
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 8
         button.layer.masksToBounds = true
-        button.addTarget(self, action: #selector(playButtonPressed), for: .touchUpInside)
+        button.addTarget(self, action: #selector(previewDownloadButtonPressed), for: .touchUpInside)
         return button
     }()
     
@@ -76,20 +77,28 @@ class TitlePreviewViewController: UIViewController {
     
     @objc func previewDownloadButtonPressed() {
         // present an alert to let the user know their movie is downloading
-        let selectedTitle = viewModel?.searchResultTitle(with: viewModel!).original_title ?? viewModel?.searchResultTitle(with: viewModel!).original_name ?? "Unknown"
-        let alert = UIAlertController(title: "Downloading...", message: "\(selectedTitle) will download to your device now.", preferredStyle: .alert)
-//        let alert = UIAlertController(title: "Downloading...", message: "Your selected title will download to your device now.", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { [weak self] _ in
-            self?.viewModel?.downloadPreviewTitle(with: (self?.viewModel!)!)
-        }))
-        self.present(alert, animated: true)
-    }
-    
-    @objc func playButtonPressed() {
-        // present an alert to let the user know their movie is about to play
-        let alert = UIAlertController(title: "Enjoy your movie!", message: "Your selected movie will begin playing now.", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-        self.present(alert, animated: true)
+        APICaller.shared.search(with: viewModel!.title, completion: { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let titles):
+                    self?.titles = titles
+                    self?.selectedTitle = titles.first!
+                    var alert = UIAlertController()
+                    let selectedTitleName = self?.selectedTitle?.original_title ?? self?.selectedTitle?.original_name ?? "Unknown"
+                    if (self!.downloadButton.isHidden) {
+                        alert = UIAlertController(title: "Enjoy your movie!", message: "\(selectedTitleName) will begin playing now.", preferredStyle: .alert)
+                    } else {
+                        alert = UIAlertController(title: "Downloading...", message: "\(selectedTitleName) will download to your device now.", preferredStyle: .alert)
+                    }
+                    alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: { [weak self] _ in
+                        self?.viewModel?.downloadPreviewTitle(with: (self?.viewModel!)!)
+                    }))
+                    self?.present(alert, animated: true)
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+        })
     }
     
     func configureConstraints() {

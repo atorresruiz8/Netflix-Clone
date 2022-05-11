@@ -54,13 +54,15 @@ class HomeViewController: UIViewController {
     }
     
     @objc func heroPlayButtonTapped() {
-        let alert = UIAlertController(title: "Enjoy your movie!", message: "Your selected movie will begin playing now.", preferredStyle: .alert)
+        let randomTrendingMovieName = randomTrendingMovie?.original_name ?? randomTrendingMovie?.original_title ?? "Unknown"
+        let alert = UIAlertController(title: "Enjoy your movie!", message: "\(randomTrendingMovieName) will begin playing now.", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
         self.present(alert, animated: true)
     }
     
     @objc func heroDownloadButtonTapped() {
-        let alert = UIAlertController(title: "Downloading...", message: "Your selected movie will download to your device now.", preferredStyle: .alert)
+        let randomTrendingMovieName = randomTrendingMovie?.original_name ?? randomTrendingMovie?.original_title ?? "Unknown"
+        let alert = UIAlertController(title: "Downloading...", message: "\(randomTrendingMovieName) will download to your device now.", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
         self.present(alert, animated: true)
         

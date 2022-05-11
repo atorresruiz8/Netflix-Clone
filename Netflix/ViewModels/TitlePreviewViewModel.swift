@@ -6,27 +6,10 @@
 //
 
 import Foundation
-// TODO: refactor all the business logic related to title preview view controller here
 struct TitlePreviewViewModel {
     let title: String
     let youtubeView: VideoElement
     let titleOverview: String
-    
-    func searchResultTitle(with model: TitlePreviewViewModel) -> Title {
-        var searchResultTitle: Title?
-        APICaller.shared.search(with: model.title, completion: { result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let titles):
-                    let titles: [Title] = titles
-                    searchResultTitle = titles.first!
-                case .failure(let error):
-                    print(error.localizedDescription)
-                }
-            }
-        })
-        return searchResultTitle!
-    }
     
     func downloadPreviewTitle(with model: TitlePreviewViewModel) {
         // search for titles with the name provided to us by model
