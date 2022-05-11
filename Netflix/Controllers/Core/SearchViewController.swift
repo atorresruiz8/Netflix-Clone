@@ -10,6 +10,7 @@ import UIKit
 class SearchViewController: UIViewController {
     
     private var titles: [Title] = [Title]()
+    private var selectedTitleName: String = ""
 
     private let discoverTable: UITableView = {
         let table = UITableView()
@@ -74,14 +75,8 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
         let title = titles[indexPath.row]
         let model = TitleViewModel(titleName: title.original_name ?? title.original_title ?? "Unknown", posterURL: title.poster_path ?? "")
         cell.configure(with: model)
-        cell.playTitleButton.addTarget(self, action: #selector(playButtonTapped), for: .touchUpInside)
+        selectedTitleName = title.original_name ?? title.original_title ?? "Unknown"
         return cell
-    }
-    
-    @objc func playButtonTapped() {
-        let alert = UIAlertController(title: "Enjoy your movie!", message: "Your selected movie will begin playing now.", preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-        self.present(alert, animated: true)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

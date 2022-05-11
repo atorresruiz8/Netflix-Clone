@@ -70,7 +70,8 @@ class HeroHeaderUIView: UIView {
         
         let movieTitleLabelConstraints = [
             movieTitleLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 40),
-            movieTitleLabel.bottomAnchor.constraint(equalTo: downloadButton.topAnchor, constant: -20)
+            movieTitleLabel.bottomAnchor.constraint(equalTo: downloadButton.topAnchor, constant: -20),
+            movieTitleLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -40)
         ]
         
         NSLayoutConstraint.activate(playButtonConstraints)
